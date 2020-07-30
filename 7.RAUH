@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-rectangular-area-under-histogram
 #include <cmath>
 #include <cstdio>
 #include <vector>
