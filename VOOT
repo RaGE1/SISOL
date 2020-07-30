@@ -1,0 +1,111 @@
+#include <cmath>
+#include <map>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <queue>
+#include <set>
+using namespace std;
+  map<int,vector<int>>m;
+struct node
+{
+    int data;
+    node* left;
+    node* right;
+};
+
+node* create(int data)
+{
+    node* newnode=new node();
+    newnode->data=data;
+    newnode->left=newnode->right=NULL;
+    return newnode;
+}
+node* insert(node* root,int data)
+{
+    if(root==NULL)
+        root=create(data);
+    else if(data<=root->data)
+       root->left= insert(root->left,data);
+    else
+        root->right=insert(root->right,data);
+    return root;
+}
+// void vertical(node* root)
+// {
+//     if(root==NULL)
+//         return;
+//  //   map<int,set<int>>m;
+//         map<int,vector<int>>m;
+
+//     queue<pair<node*,int>>q;
+//     int d=0;
+//     q.push(make_pair(root,d));
+//     while(!q.empty())
+//     {
+//         node* t=q.front().first;
+//         d=q.front().second;
+//         q.pop();
+//    //     m[d].insert(t->data);
+//       m[d].push_back(t->data);
+//         if(t->left)
+//             q.push(make_pair(t->left,d-1));
+//         if(t->right)
+//             q.push(make_pair(t->right,d+1));
+//     }
+//  //   map<int,set<int> > :: iterator i;
+//         map<int,vector<int> > :: iterator i;
+
+//     for(i=m.begin();i!=m.end();i++)
+//     {
+//         sort(i->second.begin(),i->second.end());
+//         for(int j=0;j<(i->second.size());j++)
+//             cout<<i->second[j]<<" ";
+//       //  for(auto j=i->second.begin();j!=i->second.end();j++)
+//         //    cout<<*j<<" ";
+//         cout<<"\n";
+//     }
+// }
+void vertical(node* root,int d){
+    if(root==NULL)
+        return;
+    m[d].push_back(root->data);
+    vertical(root->left,d-1);
+    vertical(root->right,d+1);
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+   
+    while(t--)
+    {node* root=NULL;
+        int n,a;
+        cin>>n;
+        while(n--)
+        {
+            cin>>a;
+            root=insert(root,a);
+        }
+     vertical(root,0);
+         map<int,vector<int> > :: iterator i;
+
+    for(i=m.begin();i!=m.end();i++)
+    {
+        sort(i->second.begin(),i->second.end());
+        for(int j=0;j<(i->second.size());j++)
+            cout<<i->second[j]<<" ";
+   
+        cout<<"\n";
+    }
+     
+    for(i=m.begin();i!=m.end();i++)
+    {
+        i->second.clear();
+   
+    } m.clear();
+     cout<<"\n";
+    }
+    return 0;
+}
