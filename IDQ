@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+   int t;
+    scanf("%d",&t);
+   
+        int n,i=499,j=500,a[100000];
+        char s[1000];
+    while(t--)
+    {
+scanf("%s",&s);
+//puts(s);
+        if(s[1]=='u')
+        {scanf("%d",&n);
+            if(s[5]=='b')
+            {
+               
+                a[i]=n;
+             i--;
+            }
+           else
+           {
+              
+            a[j]=n;
+               j++;
+           
+           }
+                
+           
+        }
+        
+        else
+            
+        {
+            if(s[4]=='b')
+            {
+            if(i==j-1)
+                printf("Empty\n");
+            else{
+                i++;
+                printf("%d\n",a[i]);
+              
+            }
+        }
+            else{
+                if(i==j-1)
+                printf("Empty\n");
+            else{
+                j--;
+                printf("%d\n",a[j]);
+                
+            }
+            }
+    }}
+}
