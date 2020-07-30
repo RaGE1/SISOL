@@ -1,0 +1,83 @@
+#include "bits/stdc++.h"
+#define ll long long int
+using namespace std;
+typedef pair<ll, ll> pairs;
+typedef pair<ll, pairs> tpl;
+ll mod = 1000000007;
+ll r, c, n, alldist[11][101][101];
+vector<string> v;
+vector<pairs> pos, req;
+bool isvalid(ll i, ll j, ll pos)
+{
+    if (i < 0 || j < 0 || i >= r || j >= c || v[i][j] == '1' || alldist[pos][i][j] != -1)
+        return 0;
+    return 1;
+}
+void dist(ll i, ll j, ll lvl, ll pos)
+{
+    queue<tpl> q;
+    q.push(make_pair(i, make_pair(j, lvl)));
+    alldist[pos][i][j] = 0;
+    while (!q.empty())
+    {
+        tpl curr = q.front();
+        q.pop();
+
+        if (isvalid(curr.first + 1, curr.second.first, pos))
+            alldist[pos][curr.first + 1][curr.second.first] = curr.second.second + 1,
+                                      q.push(make_pair(curr.first + 1, make_pair(curr.second.first, curr.second.second + 1)));
+
+        if (isvalid(curr.first, curr.second.first + 1, pos))
+            alldist[pos][curr.first][curr.second.first + 1] = curr.second.second + 1,
+                                                         q.push(make_pair(curr.first, make_pair(curr.second.first + 1, curr.second.second + 1)));
+
+        if (isvalid(curr.first - 1, curr.second.first, pos))
+            alldist[pos][curr.first - 1][curr.second.first] = curr.second.second + 1,
+                                      q.push(make_pair(curr.first - 1, make_pair(curr.second.first, curr.second.second + 1)));
+
+        if (isvalid(curr.first, curr.second.first - 1, pos))
+            alldist[pos][curr.first][curr.second.first - 1] = curr.second.second + 1,
+                                                         q.push(make_pair(curr.first, make_pair(curr.second.first - 1, curr.second.second + 1)));
+    }
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+        cin >> r >> c >> n;
+        v.clear();
+        pos.clear();
+        req.clear();
+        for (ll i = 0; i < r; i++)
+        {
+            string s;
+            cin >> s;
+            v.push_back(s);
+            for (ll j = 0; j < c; j++)
+            {
+                if (v[i][j] == '2')
+                    pos.push_back(make_pair(i, j));
+                if (v[i][j] != '1')
+                    req.push_back(make_pair(i, j));
+            }
+        }
+        memset(alldist, -1, sizeof(alldist));
+        for (ll i = 0; i < (ll)pos.size(); i++)
+            dist(pos[i].first, pos[i].second, 0, i);
+        ll ans = INT_MAX;
+        for (ll i = 0; i < (ll)req.size(); i++)
+        {
+            ll t_ans = INT_MIN;
+            for (ll j = 0; j < (ll)pos.size(); j++)
+            {
+                t_ans = max(-1 == alldist[j][req[i].first][req[i].second] ? INT_MAX : alldist[j][req[i].first][req[i].second], t_ans);
+            }
+            ans = min(ans, t_ans);
+        }
+        cout << (INT_MAX == ans ? -1 : ans) << "\n";
+    }
+}
