@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int isvalid(int f1[],int f2[])
+{
+    for(int i=0;i<26;i++)
+ if(f1[i]>f2[i])
+        return 0;
+    return 1;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s1,s2;
+        cin>>s1>>s2;
+        int f1[26],f2[26],ans=100000,f=0;
+        for(int i=0;i<26;i++)
+            f1[i]=0,f2[i]=0;
+        for(int i=0;i<s1.length();i++)
+            f1[s1[i]-'a']++;
+        int i=0,j=0;
+       while(i<s2.length() )
+       {
+           
+           f2[s2[i]-'a']++;
+           if(isvalid(f1,f2))
+           { 
+            while(isvalid(f1,f2) && j<=i)
+               f2[s2[j]-'a']--,j++;
+              
+             ans=min(ans,i-j+2);
+           f=1;
+             
+           }
+           
+               i++;
+       }
+        if(f==1)
+            cout<<ans<<"\n";
+        else
+            cout<<"-1\n";
+    }
+    return 0;
+}
