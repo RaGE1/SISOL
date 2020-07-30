@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+void gz()
+{
+// #ifndef ONLINE_JUDGE
+//     freopen("input.txt", "r", stdin);
+//     freopen("output.txt", "w", stdout);
+// #endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.precision(10);
+}
+void generateSub(int *a, int n, int id, vector<int> &temp, vector<vector<int>> &v)
+{
+    v.push_back(temp);
+    for (int i = id; i < n; i++)
+    {
+        temp.push_back(a[i]);
+        generateSub(a, n, i + 1, temp, v);
+        temp.pop_back();
+    }
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    gz();
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        int a[n] = {};
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
+        }
+        sort(a, a + n);
+        vector<vector<int>> V;
+        vector<int> v;
+        generateSub(a, n, 0, v, V);
+        for (int i = 1; i < int(V.size()); i++)
+        {
+            for (int j = 0; j < int(V[i].size()); j++)
+            {
+                cout << V[i][j] << " ";
+            }
+            cout << endl;
+        }
+        cout<<endl;
+
+    }
+    return 0;
+}
