@@ -1,0 +1,54 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define M 1000000007
+void gz()
+{
+// #ifndef ONLINE_JUDGE
+//     freopen("input.txt", "r", stdin);
+//     freopen("output.txt", "w", stdout);
+// #endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.precision(10);
+}
+int palindromeCheck(string a, int low, int high)
+{
+    if (a.size() == 1)
+        return 1;
+    int left=0, right=0;
+    while ((low >= 0) && (high < int(a.size())) && (a[low] == a[high]))
+    {
+        // cout << low << " " << a[low] << " " << high << " " << a[high] << endl;
+        left = low;
+        right = high;
+        high++;
+        low--;
+    }
+    // cout << endl;
+    return (right - left + 1);
+
+}
+int p = 31;
+int main(int argc, char const *argv[])
+{
+    gz();
+    int t;
+    cin >> t;
+    //cin.get();
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        string a;
+        cin >> a;
+        int ans = 1;
+        for (int i = 0; i < n; i++)
+        {
+            ans = max(ans, max(palindromeCheck(a, i, i), palindromeCheck(a, i, i + 1)));
+
+            // cout << "----" << endl;
+        }
+        cout << ans << endl;
+    }
+    return 0;
+}
