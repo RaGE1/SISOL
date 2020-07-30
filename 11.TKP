@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-the-knapsack-problem
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <vector>
