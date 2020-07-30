@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+unordered_map<long int,int> check;
+void sieve(){
+    for(long long i=2;i<=10000;i++){
+       
+                for(long long j=i*i;j<=100000000;j*=i){
+                    check[j]=1;
+                }
+        }
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    int t;
+    cin>>t;
+    sieve();
+  
+    while(t--){
+      long  int n;
+        cin>>n;
+        if(!check[n]){
+            cout<<"No\n";
+        }
+        else{
+            cout<<"Yes\n";
+        }
+    }
+    return 0;
+}
