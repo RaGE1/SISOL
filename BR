@@ -1,0 +1,36 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        int a[32]={0};
+        int i=0;
+        if(n==0)cout<<n<<endl;
+        else
+        {    
+        while(n!=0)
+        {
+            a[i++]=n%2;
+            n/=2;
+        }
+        i--;
+        while(i>=0)
+        {
+            cout<<a[i--];
+        }
+        cout<<endl;
+    }
+        
+    }    
+    return 0;
+}
