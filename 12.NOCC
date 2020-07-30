@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-number-of-connected-components
 #include <cmath>
 #include <cstdio>
 #include <vector>
