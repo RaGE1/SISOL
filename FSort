@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef pair<int,int> pi;
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,x;
+        unordered_map<int,int> mp;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>x;
+            mp[x]++;
+        }
+        priority_queue<pi,vector<pi>,greater<pi>> q;
+        for(auto x: mp)
+        {
+            q.push(make_pair(x.second,x.first));
+        }
+        while(q.size()>0)
+        {   int e = (q.top()).first;
+            for(int i=0;i<e;i++)
+                cout<<(q.top()).second<<" ";
+            q.pop();
+        }
+        cout<<endl;
+    }
+    return 0;
+}
