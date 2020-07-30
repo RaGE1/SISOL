@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+int t,top=-1,sta[10000];
+    scanf("%d",&t);
+    while(t--)
+    {
+        int n;
+        char s[100],s1;
+        scanf("%s",&s);
+        s1=s[1];
+        switch(s1)
+        {
+            case 'o':
+                if(top==-1)
+                    printf("Empty\n");
+                else
+                    printf("%d\n",sta[top--]);
+                break;
+            case 'u':
+                scanf("%d",&n);top++;
+                sta[top]=n;
+                break;
+        }
+    }
+    
+    return 0;
+}
