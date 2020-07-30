@@ -1,0 +1,53 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int t;
+    cin>>t; // reading no of testcases
+    string c;
+    getline( cin,c); // handles the line release by cin function
+    
+    while(t--){
+        
+        string s;
+        getline (cin,s); // reading entire line as a string
+    
+        int i = 0, v = 0, w = 0, c = 0, n = s.length() - 1;
+        
+        while (s[i] == ' ' && i <= n) // removing the staring spaces which are Unnecessary  ex: "   abc"; 
+            i++;
+      
+     
+        
+        if(i <= n) // checking whether the string contains atleast one character other than spaces  
+            w++;  // if i is greater than n that indicates string has only spaces else it has alteast one character which                   //means atleast one word  { in case only spaces in upper while loop the loop will 
+                  //breaks due to the condition i<=n that i become n+1;} ex: "      ";
+        
+           while (s[n] == ' ') // removing the leading spaces which are unnecessary  ex: "abc   ";
+            n--;
+        
+        for ( ; i <= n; i++) // here we get only string which are type of "abbc   bbbb ssd", "jgj"(no leading spaces and 
+                            //starting spaces)
+        {
+           if (s[i] == ' '){ //occurannce of a space indicates that we are about to get word after the space (since there
+               w++;           //are no leading spaces)
+                         // increasing the word count
+        while (s[i] == ' ' && i <= n) // removing multiple spaces between two word which are unnecessary ex: "abc 
+            i++;
+            
+           }
+        
+            if(s[i]=='a' ||  s[i]=='e' || s[i]=='i' || s[i]=='o' ||s[i]=='u' || s[i]=='A' || s[i]=='E' || s[i]=='I'|| s[i]=='O'|| s[i]=='U') // checking for vowel
+                v++;
+            else // checking for consonent
+                c++;
+        }
+        cout<<w<<" "<<v<<" "<<c<<"\n"; //printing the count 
+    }
+    return 0;
+}
