@@ -1,0 +1,108 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+long long int g_sum, mod = 1000000007;
+
+struct node{
+    int data;
+    node* left, *right;
+};
+
+long long int powmod (long long int a, long long int b) {
+    
+    long long int ans = 1;
+    
+    while(b > 0) {
+        if(b & 1)
+            ans = (ans * a) % mod;
+        a = (a * a) % mod;
+        b/=2;
+    }
+    return ans;
+}
+
+node* creat(int data) {
+    
+    node* t = new node();
+    
+    t->data = data;
+    
+    t->left = t->right=NULL;
+    
+    return t;
+}
+
+node* insert(int data, node* root) {
+    
+    if (root == NULL) { 
+        root = creat(data);
+        return root;
+    }
+    
+    if(root->data >= data)
+        root->left = insert (data, root->left);
+    else
+        root->right = insert (data, root->right);
+    
+    return root;
+}
+
+void sumrl(node* root, long long int sum) {
+    
+    if(root == NULL) return;
+    if(root->data==0)
+        sum*=10;
+    else
+    sum = ( (sum * powmod (10, floorl(log10(root->data))+1 )) % mod + root->data) % mod;
+    
+    if(root->left == NULL && root->right == NULL) {
+        
+        g_sum = (g_sum+sum) % mod;
+        return;
+    }
+    
+    //cout<<sum<<" ";
+    //cout<<sum+root->data<<" ";
+    //sum+=root->data;
+    
+    sumrl (root->left, sum);
+
+    sumrl (root->right, sum);
+    
+}
+
+int main() {
+ 
+    int t;
+    cin>>t;
+    
+    while(t--) {
+        
+        int n;
+        
+        cin>>n;
+        
+        node *root = NULL;
+        
+        while(n--) {
+            
+            int a;
+            
+            cin>>a;
+            
+            root = insert (a, root);
+        }
+        
+        g_sum = 0;
+        
+        sumrl (root, 0);
+        
+        cout<<g_sum<<"\n";
+        
+    }
+    return 0;
+}
