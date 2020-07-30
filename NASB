@@ -1,0 +1,31 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+long int trib[1000002];
+void tribonacci()
+{
+    trib[0]=1;
+    trib[1]=1;
+    trib[2]=2;
+    for(int i=3;i<=1000001;i++ )
+        trib[i]=(trib[i-1]+trib[i-2]+trib[i-3])%1000000007;
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    
+    tribonacci();
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n;
+        cin>>n;
+       
+        cout<<trib[n+1]<<"\n";
+    }
+    return 0;
+}
