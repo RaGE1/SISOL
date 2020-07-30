@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+ll mod = 1000000007;
+
+int main() { 
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n,f=0,maxi=INT_MIN;
+        cin>>n;
+        ll a[n];
+        for(ll i=0;i<n;i++)
+        {cin>>a[i];
+        if(a[i]>=0)
+         f=1;
+         maxi=max(a[i],maxi);
+        }
+        ll dp0=0,dp1=0,pdp0,pdp1;
+        for(ll i=0;i<n;i++){
+            pdp0=max(dp1,dp0);
+            pdp1=dp0+a[i];
+            dp0=pdp0;
+            dp1=pdp1;
+        }
+        if(!f)
+            cout<<maxi<<"\n";
+        else
+        cout<<max(dp0,dp1)<<"\n";
+        
+    }
+    
+}
