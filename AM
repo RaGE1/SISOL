@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int  main(){
+        ios_base::sync_with_stdio(0); cin.tie(0);   
+        
+    ll t;
+    
+    cin >> t;
+    
+    while (t--){
+        
+        ll n;
+        
+        cin >> n;
+        
+        priority_queue<ll>qa;
+        
+        priority_queue<ll,vector<ll>,greater<ll>>qb;
+        
+        while (n--) {
+            
+            ll a;
+            
+            cin >> a;
+            
+            if(qa.size() == 0) {
+                
+                qa.push(a);
+                
+                cout<<a<<" ";
+            }
+            else {
+                
+                if(a > qa.top()) {
+                    
+                    qb.push(a);
+                    
+                    if (qa.size() - qb.size() != 0 && qa.size() - qb.size() != 1 ) {
+                        
+                        qa.push(qb.top());
+                        
+                        qb.pop();
+                        
+                    }
+                    cout<<qa.top()<<" ";
+                }
+                else
+                {
+                    qa.push(a);
+                    
+                    if (qa.size() - qb.size() != 0 && qa.size() - qb.size() != 1 ) {
+                        
+                        qb.push(qa.top());
+                        
+                        qa.pop();
+                        
+                    }
+                    cout<<qa.top()<<" ";
+                }
+            }
+        }
+        cout<<"\n";
+    }
+}
