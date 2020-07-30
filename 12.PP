@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-palindrome-partitioning
 #include <bits/stdc++.h>
 
 using namespace std;
