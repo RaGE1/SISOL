@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+ll mod=1000000007;
+ll powmod(ll a,ll b)
+{
+    ll ans=1;
+    while(b>0)
+    {
+        if(b%2==1)
+            ans=(ans*a)%mod;
+        b/=2;
+        a=(a*a)%mod;
+    }
+    return ans;
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string s1,s2;
+        cin>>s1>>s2;
+        ll p = 29,  h1 = 0, ans = 0, h2 = 0, power;
+        
+        for(int i = 0; i < s1.length(); i++)
+        {
+            if(i == 0)
+                power = 1;
+            else
+                power = (power * p) % mod;
+            h1 = ( h1 + ( s1[i] * power ) ) % mod;
+        }
+        for(int i = 0; i < s1.length(); i++)
+        {
+            if(i == 0)
+                power = 1;
+            else
+                power = (power * p) % mod;
+            
+             h2 = ( h2 + ( s2[i] * power ) ) % mod;
+        }
+        if(h1 == h2 )
+        {
+            ans++;
+        }
+       ll st = 0 , stpower = 1;
+        for(int i = s1.length(); i < s2.length(); i++)
+        {
+            
+            
+            h2 = ( h2 - (s2[st] * stpower ) % mod + mod ) % mod;
+            st++;
+             stpower = (stpower * p) % mod;
+            power = (power * p) % mod;
+         h2 = ( h2 + ( s2[i] * power ) ) % mod;
+
+            h1 = (h1 * p) % mod;
+          
+            if( h1 == h2 )
+                ans++;
+        }
+        cout<< ans <<"\n";
+      
+    }
+    return 0;
+}
