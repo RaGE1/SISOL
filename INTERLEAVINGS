@@ -1,0 +1,57 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+string s[10000];
+void interleaving(string s1,string s2,int i1,int i2,int k)
+{
+    if(i1==(int)s1.length())
+    {
+        for(int i=0;i<k;i++)
+            cout<<s[i];
+        for(;i2<(int)s2.length();i2++)
+            cout<<s2[i2];
+        cout<<"\n";
+        return;
+    }
+    if(i2==(int)s2.length())
+    {
+         for(int i=0;i<k;i++)
+            cout<<s[i];
+        for(;i1<(int)s1.length();i1++)
+            cout<<s1[i1];
+        cout<<"\n";
+        return;
+    }
+    if(s1[i1]<s2[i2]){
+    s[k]=s1[i1];
+    interleaving(s1,s2,i1+1,i2,k+1);
+    s[k]=s2[i2];
+     interleaving(s1,s2,i1,i2+1,k+1);
+    }
+    else{
+ 
+    s[k]=s2[i2];
+     interleaving(s1,s2,i1,i2+1,k+1);
+           s[k]=s1[i1];
+    interleaving(s1,s2,i1+1,i2,k+1);
+    }
+    
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t,m=1;
+    cin>>t;
+    while(t--)
+    {
+        cout<<"Case #"<<m<<":\n";
+        string s1,s2;
+        cin>>s1>>s2;
+        interleaving(s1,s2,0,0,0);
+        m++;
+    }
+    return 0;
+}
