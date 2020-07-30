@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+
+int main() {
+    //ios_base::sync_with_stdio(0); cin.tie(0); 
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n,m;
+        cin>>n>>m;
+        ll a[n+1][m+1],ans=INT_MIN,pre[n+1][m+1];
+        for(ll i=1;i<=n;i++)
+            for(ll j=1;j<=m;j++)
+                cin>>a[i][j];
+        memset(pre,0,sizeof(pre));
+        for(ll i=1;i<=n;i++){
+            for(ll j=1;j<=m;j++){
+                
+                pre[i][j]=pre[i][j-1]+pre[i-1][j]-pre[i-1][j-1]+a[i][j];
+            }
+        }
+        for(ll i=1;i<=n;i++){
+            for(ll j=1;j<=m;j++){
+                 
+                for(ll k=i;k<=n;k++){
+                    
+                    for(ll l=j;l<=m;l++){
+                      
+                        ans=max(ans,pre[k][l]-pre[i-1][l]-pre[k][j-1]+pre[i-1][j-1]);
+                    }
+                }
+            }
+        }
+        cout<<ans<<"\n";
+    }
+    return 0;
+}
