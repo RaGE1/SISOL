@@ -1,0 +1,27 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int m,n;
+        cin>>m>>n;
+        int b=m^n;
+        int c=0;
+        while(b)
+        {
+            c+=b&1;
+            b>>=1;
+        }
+        cout<<c<<endl;
+    }
+    return 0;
+}
