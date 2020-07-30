@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,a,c=0,sum=0;
+        map<int,int>m;
+        cin>>n;
+        for(int i=0;i<n;i++)
+        {
+            cin>>a;
+            if(a==0)
+                sum-=1;
+            else
+                sum+=1;
+            m[sum]++;
+        }
+        for(auto i=m.begin();i!=m.end();i++)
+        {
+            if(i->second>1)
+                c+=(i->second)*(i->second-1)/2;
+        }
+        c+=m[0];
+        cout<<c<<"\n";
+    }
+    return 0;
+}
