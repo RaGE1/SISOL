@@ -1,0 +1,47 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+vector<int>v[100000];
+int vis[100000];
+bool dfs(int node,int par)
+{
+    vis[node]=1;
+    for(int i=0;i<(int)v[node].size();i++)
+        if(!vis[v[node][i]])
+        { if(dfs(v[node][i],node))
+               return true;
+        }
+               else
+             {
+                 if(v[node][i]!=par)
+                     return true;
+             }
+             return false;  
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,m,f=0,a,b,i,m1;
+        cin>>n>>m;m1=m;
+        for(i=1;i<=n;i++)
+            v[i].clear(),vis[i]=0;
+        while(m1--)
+            cin>>a>>b, v[a].push_back(b),v[b].push_back(a);
+        for(i=1;i<=n;i++)
+        if(!vis[i])
+        {
+            if(dfs(i,-1)){
+                f=1;break;}}
+        if(f==0 && m<=n-1)
+            cout<<"Yes\n";
+        else
+            cout<<"No\n";
+    }
+    return 0;
+}
