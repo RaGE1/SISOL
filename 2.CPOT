@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-check-power-of-two
 #include <cmath>
 #include <cstdio>
 #include <vector>
