@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-binary-strings-with-no-adjacent-1s
 #include <cmath>
 #include <cstdio>
 #include <vector>
