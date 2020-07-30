@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-largest-palindromic-substring-hard
 #include<bits/stdc++.h>
 using namespace std;
 #define  mod 1000000007
