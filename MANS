@@ -1,0 +1,72 @@
+#include <bits/stdc++.h> 
+using namespace std;
+int dp[100000][2];
+struct node{
+    int data,id;
+    node* left, *right;
+};
+
+node* creat(int data,int idx) {
+    
+    node* t = new node();
+    
+    t->data = data;
+    t->id=idx;
+    t->left = t->right=NULL;
+    
+    return t;
+}
+
+node* insert(int data, node* root,int idx) {
+    
+    if (root == NULL) { 
+        root = creat(data,idx);
+        return root;
+    }
+    
+    if(root->data >= data)
+        root->left = insert (data, root->left,idx);
+    else
+        root->right = insert (data, root->right,idx);
+    
+    return root;
+}
+int altsum(node* root,int f){
+    if(root==NULL)
+        return 0;
+    if(dp[root->id][f]==-1){
+    if(f){
+        int y=altsum(root->right,f^1), x=altsum(root->left,f^1);
+        int l=altsum(root->right,f),m=altsum(root->left,f);
+        return dp[root->id][f]=max(root->data+x+y,l+m);
+    }
+    else{
+        int l=altsum(root->right,f^1),m=altsum(root->left,f^1);
+
+        return dp[root->id][f]=l+m;
+    }}
+    return dp[root->id][f];
+}
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        node* root=NULL;
+        int idx=0;
+        while(n--){
+            int a;
+            cin>>a;
+            root=insert(a,root,idx);
+            idx++;
+        }
+    
+        memset(dp,-1,sizeof(dp));
+        cout<<altsum(root,1)<<"\n";
+       
+    }
+    return 0;
+}
