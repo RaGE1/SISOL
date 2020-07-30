@@ -1,0 +1,43 @@
+
+#include <bits/stdc++.h> 
+#define mod 1000000007
+using namespace std; 
+ 
+  long long int powmod(long long int a, long long int b)
+  { 
+      long long int ans=1;
+      while( b > 0 )
+      {
+          if( b % 2 == 1)
+              ans = (ans * a) % mod;
+          a = (a * a) % mod;
+          b /= 2;
+      } 
+      return ans;
+  }
+int main() {
+    
+    int t;
+    cin>>t;
+    
+    while(t--)
+    {
+        long long int n, x, y;
+        cin>>n;
+      x = ( -1 + sqrt( 1 + 8 * n ) ) / 2;
+        
+    if( x * ( x + 1 ) / 2 < n )
+    {
+        y = n - ( x * (x+1) / 2 ) - 1;
+        
+        x++;
+
+    }
+        else
+    {
+        y = x - 1;
+    }
+        cout<<( powmod( 2, x ) + powmod( 2, y ) ) % mod<<"\n";
+    }
+    return 0; 
+}
