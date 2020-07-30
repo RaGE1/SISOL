@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+struct node{
+    node* a[26];
+    int maxl;
+};
+node* create(){
+    node *t=new node();
+    for(int i=0;i<26;i++)
+        t->a[i]=NULL;
+    t->maxl=0;
+    return t;
+}
+void insert(node *root,string s){
+    for(int i=0;i<(int)s.length();i++){
+        if(root->a[s[i]-'a']==NULL)
+            root->a[s[i]-'a']=create();
+        root->a[s[i]-'a']->maxl=max(root->a[s[i]-'a']->maxl,(int)s.length());
+        root=root->a[s[i]-'a'];
+    }
+        
+}
+int search(node* root,string s){
+    
+    int ans=0;
+    for(int i=s.length()-1;i>=0;i--){
+        if(root->a[s[i]-'a']==NULL){
+          
+            break;
+        }else{
+          ans=root->a[s[i]-'a']->maxl;
+            root=root->a[s[i]-'a'];
+        }
+    }
+    return ans;
+}
+int main() {
+
+    int n;
+    cin>>n;
+    node *root=create();
+    while(n--){
+        string s;
+        cin>>s;
+        reverse(s.begin(),s.end());
+       
+        insert(root,s);
+    }
+    int t;
+    cin>>t;
+    while(t--){
+        string s;
+        cin>>s;
+        cout<<search(root,s)<<"\n";
+    }
+}
