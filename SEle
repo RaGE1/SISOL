@@ -1,0 +1,51 @@
+#include<bits/stdc++.h>
+using namespace std;
+long long int c=0;
+void com(long long int a[],long long int i,long long int n)
+{
+    long long int temp[1000000],k=0,i1=i,i2=(i+n)/2+1;
+    while(i2<=n && i1<=((i+n)/2))
+    {
+        
+        if(a[i1]>a[i2])
+        {
+            temp[k++]=a[i2];i2++;c+=((i+n)/2)-i1+1;
+        }
+     else
+        {
+            temp[k++]=a[i1];i1++;
+        }
+    }
+    while(i1<=(i+n)/2)
+    {temp[k++]=a[i1];i1++;
+    }
+        while(i2<=(n))
+    {temp[k++]=a[i2];i2++;}
+    for(i1=i,i2=0;i1<=n;i1++,i2++)
+        a[i1]=temp[i2];
+}
+void  mergesort(long long int a[],long long int i, long long int n)
+{
+    if(i==n)
+        return;
+    mergesort(a,i,(i+n)/2);
+    mergesort(a,(i+n)/2+1,n);
+    com(a,i,n);
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int t;
+    cin>>t;
+    while(t--)
+    {
+      long long   int n,a[1000000],i;
+        cin>>n;
+        for(i=0;i<n;i++)
+            cin>>a[i];
+c=0;
+        mergesort(a,0,n-1);
+           cout<<c<<"\n";
+    }
+    return 0;
+}
