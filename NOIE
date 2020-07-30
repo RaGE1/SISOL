@@ -1,0 +1,74 @@
+#include "bits/stdc++.h"
+#define ll long long int
+using namespace std;
+ll mod = 1000000007;
+ll x[] = {1, 0, -1}, y[] = {1, 0, -1}, r, c, par[1000001];
+vector<string> v;
+bool isvalid(int a, int b)
+{
+    if (a < 0 || b < 0 || a >= r || b >= c || v[a][b] == '0')
+        return 0;
+    return 1;
+}
+ll find(ll a)
+{
+    if (par[a] < 0)
+        return a;
+    return par[a] = find(par[a]);
+}
+void union1(ll a, ll b)
+{
+    ll x = find(a);
+    ll y = find(b);
+    if (x == y)
+        return;
+    par[x] += par[y];
+    par[y] = x;
+}
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    ll t;
+    cin >> t;
+    while (t--)
+    {
+
+        v.clear();
+        cin >> r >> c;
+        for (ll i = 0; i < r * c; i++)
+            par[i] = -1;
+        for (ll i = 0; i < r; i++)
+        {
+            string s;
+            cin >> s;
+            v.push_back(s);
+        }
+        for (ll i = 0; i < r; i++)
+        {
+            for (ll j = 0; j < c; j++)
+            {
+                if (v[i][j] == '1')
+                {
+
+                    for (ll x1 = 0; x1 <= 2; x1++)
+                    {
+                        for (ll y1 = 0; y1 <= 2; y1++)
+                        {
+                            if (isvalid(x[x1] + i, y[y1] + j))
+                            {
+                                union1(c * i + j, (x[x1] + i) * c + (y[y1] + j));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ll ans = 0;
+        for (ll i = 0; i < r * c; i++)
+            if (par[i] < 0 && v[i/c][i%c]=='1')
+                ans++;
+        cout << ans << "\n";
+    }
+}
