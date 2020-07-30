@@ -1,0 +1,110 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int pre[1000001],in[1000001],n,prev1;
+
+
+int search1(int x){
+    for(int i=0;i<n;i++)
+        if(in[i]==x)
+            return i;
+    return 0;
+}
+void gen(int low,int high)
+{
+    if(prev1>=n)
+        return ;
+    if(low>high)
+        return ;
+    int idx=search1(pre[prev1]);
+    prev1++;
+  
+    gen(low,idx-1);
+    gen(idx+1,high);
+    cout<<in[idx]<<" ";
+
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        for(int i=0;i<n;i++)
+            cin>>pre[i];
+        for(int i=0;i<n;i++)
+            cin>>in[i];
+        prev1=0;
+        gen(0,n-1);
+  
+        cout<<"\n";
+    }
+    return 0;
+}
+=======================================================================================================================================================
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int pre[1000001],in[1000001],n,prev1;
+struct node{
+    int data;
+    node* left;
+    node* right;
+};
+node* create(int data){
+    node *x=new node();
+    x->data=data;
+    x->left=NULL;
+    x->right=NULL;
+    return x;
+}
+void post(node *root){
+    if(root==NULL)
+        return;
+    post(root->left);
+    post(root->right);
+    cout<<root->data<<" ";
+}
+int search1(int x){
+    for(int i=0;i<n;i++)
+        if(in[i]==x)
+            return i;
+    return 0;
+}
+node* gen(node* root,int low,int high)
+{
+    if(prev1>=n)
+        return NULL;
+    if(low>high)
+        return NULL;
+    int idx=search1(pre[prev1]);
+    prev1++;
+    root=create(in[idx]);
+    root->left=gen(root->left,low,idx-1);
+    root->right=gen(root->right,idx+1,high);
+    return root;
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int t;
+    cin>>t;
+    while(t--){
+        cin>>n;
+        for(int i=0;i<n;i++)
+            cin>>pre[i];
+        for(int i=0;i<n;i++)
+            cin>>in[i];
+        prev1=0;
+        node* root=NULL;
+        root=gen(root,0,n-1);
+        post(root);
+        cout<<"\n";
+    }
+    return 0;
+}
