@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+   int t,i=0,j=0,a[100000];
+    scanf("%d",&t);
+getchar();
+    while(t--)
+    {
+        int n;
+        char s[1000];
+
+
+        if(getchar()=='E')
+        {
+           scanf("%s %d",&s,&n);
+            
+          getchar();
+            a[j]=n;
+            j++;
+           
+                
+           
+        }
+        
+        else
+            
+        {scanf("%s",&s);
+         getchar();
+            if(i==j)
+                printf("Empty\n");
+            else{
+                printf("%d\n",a[i]);
+                i++;
+            }
+        }
+    }
+}
