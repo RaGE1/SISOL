@@ -1,0 +1,26 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);cout.precision(10);
+    long long int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        unsigned long long int c=0;
+        for(long long int i=5;i<=n;i*=5)
+        {   
+            c+=n/i;
+        }
+        cout<<c<<endl;
+    }
+    return 0;
+}
