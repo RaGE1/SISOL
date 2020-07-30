@@ -1,0 +1,135 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+void swap(vector<int> &v,int i,int j)
+{
+    int temp = v[i];
+    v[i] = v[j];
+    v[j] = temp;
+}
+class MinHeap{
+    public:
+        vector<int> hp;
+        MinHeap(){
+         hp.push_back(-1);//dummy   
+        }
+        void insert(int x)
+        {
+            hp.push_back(x);
+            int child = hp.size()-1;
+            int parent = child/2;
+            while(parent>=1&&hp[child]<hp[parent])
+            {
+                swap(hp,child,parent);
+                child = parent;
+                parent = child/2;
+            }
+        }
+        int getMin(){
+            return hp[1];
+        }
+        int getSize(){
+            return hp.size()-1;
+        }
+        void delMin()
+        {
+            int pos = hp.size()-1;
+            if(pos==1)
+            {
+                hp.pop_back();
+                return;
+            }
+            else if(pos==0)
+            {
+                return;
+            }
+            int idx = 1;
+            hp[idx] = hp[pos];
+            hp.pop_back();
+            int left;
+            int right;
+            while(idx<pos)
+            {
+                left = 2*idx;
+                right = left+1;
+                if(left<pos&&right<pos)//two child
+                {
+                    int id = 0;
+                    if(hp[left]>hp[right])
+                    {
+                        if(hp[idx]<hp[right])break;
+                        id = right;
+                    }
+                    else
+                    {
+                        if(hp[idx]<hp[left])break;
+                        id = left;
+                    }
+                    swap(hp,idx,id);
+                    idx = id;
+                }
+                else if(left<pos && right>=pos)//one left child
+                {
+                    if(hp[idx]<hp[left])
+                        break;
+                    else
+                    {
+                        swap(hp,idx,left);
+                        idx=left;
+                    }
+                }
+                else if(left>=pos)
+                {
+                    break;
+                }
+                
+            }
+        }
+        void show()
+        {
+            for(auto x: hp)
+            {
+                cout<<x<<" ";
+            }
+        }
+};
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);cout.precision(10);
+    int t;
+    cin>>t;
+    cin.get();
+    MinHeap m;
+    while(t--)
+    {
+        string s;
+        cin>>s;
+        if(s=="insert")
+        {
+            int n;
+            cin>>n;
+            m.insert(n);
+        }
+        else if(s=="getMin")
+        {
+            if(m.getSize()==0)
+                cout<<"Empty"<<endl;
+            else
+                cout<<m.getMin()<<endl;
+        }
+        else if(s=="delMin")
+        {  
+            m.delMin();
+            // if(m.getSize()==0)
+            //     cout<<"Empty"<<endl;
+        }
+    }
+    // cout<<endl;
+    // m.show();
+    return 0;
+}
