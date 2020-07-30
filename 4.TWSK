@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-triplet-with-sum-k
 #include <cmath>
 #include <cstdio>
 #include <vector>
