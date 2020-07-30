@@ -1,3 +1,4 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-maximum-alternate-nodes-sum
 #include <bits/stdc++.h> 
 using namespace std;
 int dp[100000][2];
