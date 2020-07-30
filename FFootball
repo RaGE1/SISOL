@@ -1,0 +1,99 @@
+#include <bits/stdc++.h>
+using namespace std;
+/*
+max_i is to store last index of floor
+min_i is to store first index of floor
+ans [][] is to store outpur array
+*/
+int temp, ans[41][41], max_i, min_i;
+void insert(int i, int cur_h)
+{
+    // update last,first index ans maximum height(temp) for every recursion
+    max_i = max( i, max_i );
+    min_i = min( i, min_i );
+    temp = max( temp, cur_h );
+ 
+    if(ans[cur_h][i] == 1)     //if current postion is filled
+    {
+        if(ans[cur_h][i+1] == 0 )      //if  right postion is vacant
+        {
+            if(cur_h-1 >= 0)       //if present height is not floor 
+                insert(i+1, cur_h-1);      //sliding ball to right-down 
+            
+            else        //if current height is floor then inserting ball at  current position
+            {
+                //cout<<"ok",
+                ans[cur_h][i+1] = 1;
+                max_i = max( i + 1, max_i);    //updating last index of output array
+            }
+        }
+        
+        else if(ans[cur_h][i-1] == 0 )    //if  left postion is vacant
+             {  
+                if( cur_h-1 >= 0 )      //if present height is not floor 
+                    insert(i - 1, cur_h - 1);  //sliding ball to left-down 
+            
+            
+                else           //if current height is floor then inserting ball at current position
+                    ans[cur_h][i-1] = 1, min_i = min(min_i, i - 1);  //updating min_i variable
+             }
+        
+        
+        else //if neither left nor right is vacant then inserting the ball on the top of current position
+                 temp = max(temp, cur_h + 1), ans[cur_h+1][i] = 1;  
+           
+    }
+    
+    
+    else    //if   current position is vacant
+        {
+            if(cur_h-1 >= 0) //if present height is not floor
+                insert(i, cur_h-1);   //droping the ball one height down 
+            else     //if current height is floor
+                ans[cur_h][i] = 1; //inserting at current position
+        }
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    for(int t1 = 1; t1 <= t; t1++)
+    {     
+        cout<<"Case "<<t1<<":\n";
+     //initializing output array for every testcase 
+    for(int i = 0; i <= 40; i++)
+    { 
+        for(int j = 0; j <=40 ; j++)
+            ans[i][j]=0;
+    }
+   //cur_h is the maximum height of output array
+        int n, cur_h = 0;
+        
+     max_i = 0;
+     min_i = INT_MAX;
+        cin>> n;
+        while( n-- ){
+            int i;
+            cin>> i;
+            temp = 0;//temp is to store maxium height for every insertion
+            
+            insert(i + 20, cur_h);//passing 'i' as 'i+20' because im assuming index '20' as '0' based on the fact that we should   travel left from index '0' also to avoid negative index i strated at 20   
+            
+            cur_h = max(temp, cur_h); //updating cur_h to store maximum height
+        }
+        //printing output array 
+        for(int i = cur_h; i >= 0; i--)
+        {
+            for(int j = min_i; j <= max_i; j++)
+            {
+                if(ans[i][j] == 0)
+                    cout<<".";
+                else
+                    cout<<"O";
+            }
+            cout<<"\n";
+        }
+        
+    }
+    return 0;
+}
