@@ -1,0 +1,56 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int flor(int *a,int n,int ele)
+{
+    int low = 0;
+    int high = n-1;
+    int res = 0;
+    while(low<=high)
+    {
+        int mid = low+(high-low)/2;
+        if(a[mid]==ele)
+        {
+            return a[mid];
+        }
+        else if(a[mid]<ele)
+        {
+            res = mid;
+            low = mid+1;
+        }
+        else
+            high = mid -1;
+    }
+    return a[res];
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    sort(a,a+n);
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int b;
+        cin>>b;
+        if(b<a[0])
+            cout<<-2147483648<<endl;
+        else if(b>a[n-1])
+            cout<<a[n-1]<<endl;
+        else
+        {
+         cout<<flor(a,n,b)<<endl;   
+        }
+    }
+    return 0;
+}
