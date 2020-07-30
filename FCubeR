@@ -1,0 +1,44 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    long  int t;
+    cin>>t;
+    while(t--)
+    {
+       
+     long long int  n,low, high, mid;
+        cin>>n;
+        if(n < 0)
+        {
+            n *= -1;
+            cout<<"-";
+        }
+        if(n==0 || n==1 )
+            cout<<n<<"\n";
+        low =2; high = n;
+        while(low <= high)
+        {
+            mid = (low + high)/2;
+          
+            float x = log(n)/log(mid);
+            if(x == 3.0)
+            {
+                cout<<mid<<"\n";
+                break;
+            }
+            if(x > 3.0)
+                low = mid + 1;
+           
+            else
+                high = mid - 1;
+        }
+    }
+    return 0;
+}
