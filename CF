@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define M 1000000007
+typedef long long ll;
+
+void gz()
+{
+// #ifndef ONLINE_JUDGE
+//     freopen("input.txt", "r", stdin);
+//     freopen("output.txt", "w", stdout);
+// #endif
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.precision(10);
+}
+int p = 31;
+int main()
+{
+    gz();
+    ll t;
+    cin >> t;
+    cin.get();
+    ll a[1000001]={1};
+    for(ll i = 1;i<=1000000;i++)
+    {
+        a[i] = (((a[i-1])%M)*((i)%M))%M;
+    }
+    while (t--)
+    {
+        ll n;
+        cin>>n;
+        cout<<a[n]<<"\n";
+    }
+    return 0;
+}
