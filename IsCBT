@@ -1,0 +1,70 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <queue>
+using namespace std;
+struct node
+{
+  int data;
+    node* left;
+    node* right;
+};
+int iscb(node* root,int n)
+{
+    queue<node* >q;
+    q.push(root);int co=0;
+    while(!q.empty())
+    {
+        node* p=q.front();
+        q.pop();co++;
+      if(p==NULL )
+          if(co!=n+1)
+          return 0;
+          else
+              break;
+        q.push(p->left);
+        q.push(p->right);
+            
+    }
+    return 1;
+}
+node* create(int data)
+{
+    node* newn=new node();
+    newn->data=data;
+    newn->left=newn->right=NULL;
+    return newn;
+}
+node* insert(node* root,int data)
+{
+    if(root==NULL)
+        root=create(data);
+    else if(data<=root->data)
+        root->left=insert(root->left,data);
+    else
+        root->right=insert(root->right,data);
+    return root;
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        node* root=NULL;
+        int n,a,i;
+        cin>>n;
+        for(i=0;i<n;i++)
+        {cin>>a;
+        root=insert(root,a);
+    }
+        if(iscb(root,n))
+            cout<<"Yes\n";
+        else
+            cout<<"No\n";
+    
+    }
+    return 0;
+}
