@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+ll mod = 1000000007;
+ll dice[10000001];
+int main() { 
+    ios_base::sync_with_stdio(0); cin.tie(0);
+ 
+    dice[0]=1;
+    for(ll i=1;i<=100000;i++){
+        for(ll j=i-1;j>=i-6;j--){
+            if(j>=0)
+                dice[i]= (dice[i]+dice[j])%1000000007;
+            else
+                break;
+        }
+    }
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n;
+        cin>>n;
+        cout<<dice[n]<<"\n";
+    }
+    
+}
