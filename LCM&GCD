@@ -1,0 +1,32 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int m,n;
+        cin>>m>>n;
+        
+        long long int min=m>n?n:m;
+        long long int max=m+n-min;
+        long long s=max*min;
+        while(min!=0)
+        {
+            m=max%min;
+            max=min;
+            min=m;
+        }
+        
+        cout<<s/max<<" "<<max<<endl;
+        
+    }
+    return 0;
+}
