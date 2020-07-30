@@ -1,0 +1,46 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);cout.precision(10);
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,sum;
+        cin>>n>>sum;
+        int a[n] = {0};
+        for(int i=0;i<n;i++)
+            cin>>a[i];
+        sort(a,a+n);
+        bool flag=false;
+        for(int i =1;i<n-1;i++)
+        {
+            int p =i-1;
+            int low = i;
+            int high = n-1;
+            while(low<high)
+            {
+                if(a[p]+a[low]+a[high]==sum)
+                {
+                    flag = true;
+                    break;
+                }
+                else if(a[p]+a[low]+a[high]<sum)
+                    low++;
+                else
+                    high--;
+            }
+        }
+        if(flag)cout<<"true"<<endl;
+        else cout<<"false"<<endl;
+    }
+    return 0;
+}
