@@ -1,0 +1,52 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+long long int tsum(long long int a[],long long int n)
+{
+  long long  int i,sum=0,max=0;
+
+    for(i=0;i<n;i++)
+    {
+        
+        sum=sum+a[i];
+               if(sum<0)
+            sum=0;
+          if(max<sum)
+            max=sum;
+
+      
+    }
+    return max;
+ 
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+       long long int x,y,n,a[100000],tot=0,i,m=-100000;
+        cin>>n;
+        for(i=0;i<n;i++)
+        {cin>>a[i];
+        if(a[i]>m)
+         m=a[i];}
+        if(m>0){
+ x= tsum(a,n);
+        for(i=0;i<n;i++)
+        {tot+=a[i];
+         a[i]=-1*a[i];}
+ y=tot+tsum(a,n);
+        if(y>x)
+            cout<<y<<"\n";
+        else
+            cout<<x<<"\n";
+        }else
+            cout<<m<<"\n";
+    }
+    return 0;
+}
