@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        stack<string>path , temp;
+     path.push("/");
+        int n,f,i;
+        
+        cin>>n;
+        while(n--)
+        {
+            string s;
+            cin>>s;
+            if(s=="pwd")
+            {
+         while(!path.empty())
+                    temp.push(path.top()),path.pop();
+                while(!temp.empty())
+                    path.push(temp.top()),cout<<temp.top(),temp.pop();
+                cout<<"\n";
+                
+               
+            }
+            else{
+                s.clear();
+                cin>>s;i=0;
+                while(i<s.length()){f=0;
+                           
+                if(s[0]=='/' && i==0)
+                {
+                   while(!path.empty())
+                       path.pop();
+                    path.push("/");
+                    i=1;
+                }
+                while(s[i]=='.' && i<s.length())
+                {
+                    i++;f=1;
+                    
+                }string st;
+                if(f==1){if(s[i]=='/')
+                        i++;
+                    path.pop();}f=0;
+                while(s[i]!='/' && s[i]!='.' && i<s.length())
+                {
+                    st+=s[i];f=1;i++;
+                }
+                if(s[i]=='/' && i<s.length())
+                    i++;
+                if(f==1)
+                {
+                    st+='/';
+                    path.push(st);f=0;
+                
+                }}
+            }
+        }
+        cout<<"\n";
+    }
+    return 0;
+}
