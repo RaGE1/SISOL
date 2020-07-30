@@ -1,0 +1,53 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+class Box{
+    public:
+    long long int xl;
+    long long int yl;
+    long long int xr;
+    long long int yr;
+    bool overlap(Box s)
+    {
+        if(this->xl>s.xr||this->xr<s.xl)return false;
+        if(this->yl>s.yr||this->yr<s.yl)return false;
+        return true;
+    }
+};
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        Box a,b;
+        cin>>a.xl>>a.yl>>a.xr>>a.yr;
+        cin>>b.xl>>b.yl>>b.xr>>b.yr;
+            long long int len1 = abs(a.xr-a.xl);
+            long long int bre1 = abs(a.yr-a.yl);
+            long long int len2 = abs(b.xr-b.xl);
+            long long int bre2 = abs(b.yr-b.yl);
+            long long int area1 = len1*bre1;
+            long long int area2 = len2*bre2;
+        if(a.overlap(b))
+        {
+            long long int len3 = abs(min(a.xr,b.xr)-max(a.xl,b.xl));
+            long long int bre3 = abs(min(a.yr,b.yr)-max(a.yl,b.yl));
+            long long int area3 = len3*bre3;
+            //cout<<area3<<endl;
+            cout<<area1+area2-area3<<endl;
+        }
+        else{
+            
+            cout<<area1+area2<<endl;
+            
+            
+        }
+        
+    }
+    return 0;
+}
