@@ -1,0 +1,71 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define  mod 1000000007
+long ph[100001];
+long sh[100001];
+long pwr[100002];
+bool valid(int x,int y,int n){
+    int sph1=x+1,sph2=n-y;
+    int d=abs(sph1-sph2);
+    long h1=(ph[y]-((x!=0)?ph[x-1]:0)+mod)%mod;
+    long h2=(sh[x]-((y!=n-1)?sh[y+1]:0)+mod)%mod;
+    if(sph1>sph2){
+        h2=(h2*pwr[d])%mod;
+    }
+    else{
+        h1=(h1*pwr[d])%mod;
+    }
+    return (h1==h2);
+}
+int BS(int c1,int c2,int n){
+    int low=0,high=min(c1,n-c2),mid,ans=c2-c1+1;
+    while(low<=high){
+        mid=low+(high-low)/2;
+        if(valid(c1-mid,c2+mid,n)==true){
+            ans=2*mid+1+(c2-c1);
+            low=mid+1;
+        }
+        else{
+            high=mid-1;
+        }
+    }
+    return ans;
+}
+int main() {
+    long p=23;
+    pwr[0]=1;
+    for(int i=1;i<100002;i++){
+        pwr[i]=(pwr[i-1]*p)%mod;
+    }
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        string s;
+        cin>>s;
+        ph[0]=s[0]*pwr[1];
+        sh[n-1]=s[n-1]*pwr[1];
+        for(int i=1;i<n-1;i++){
+            ph[i]=(ph[i-1]+(s[i]*pwr[i+1]))%mod;
+            sh[n-i-1]=(sh[n-i]+(s[n-i-1]*pwr[i+1]))%mod;
+        }
+        sh[0]=(sh[1]+(s[0]*pwr[n]))%mod;
+        ph[n-1]=(ph[n-2]+(s[n-1]*pwr[n]))%mod;
+        int ans=BS(0,0,n);
+        for(int i=1;i<n;i++){
+            int x1=BS(i,i,n);
+            if(ans<x1){
+                ans=x1;
+            }
+            if(s[i-1]==s[i]){
+                x1=BS(i-1,i,n);
+                if(ans<x1){
+                    ans=x1;
+                }
+            }
+        }
+        printf("%d\n",ans);
+    }
+    return 0;
+}
