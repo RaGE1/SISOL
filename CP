@@ -1,0 +1,50 @@
+#include <cmath>
+#include <cstdio>
+#include <climits>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int perform( int a[], int cur, int n)
+{
+    int sum=0,k=1;
+    for( int i=0; i < n; i++)
+    {
+        sum+= a[i];
+        if( sum > cur)
+        {
+            k++;
+            sum=a[i];
+        }
+    }
+    return k;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n, k, a[100000], maxi=0, total=0, ans=INT_MAX;
+        cin>>n>>k;
+        for(int i=0;i<n;i++)
+        {cin>>a[i];
+            maxi=max(maxi,a[i]);
+         total+=a[i];
+        }
+        int low = maxi, high = total, mid;
+        while( low <= high )
+        {
+            mid = (low + high) / 2;
+            if( perform( a, mid, n ) <= k )
+            {
+                ans = min( ans, mid );
+            high = mid - 1;
+            }
+            else
+                low = mid + 1;
+        }
+        cout<< ans << "\n"; 
+    }
+    return 0;
+}
