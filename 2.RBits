@@ -1,0 +1,49 @@
+//https://www.hackerrank.com/contests/smart-interviews/challenges/si-reverse-bits
+2
+#include <cmath>
+3
+#include <cstdio>
+4
+#include <vector>
+5
+#include <iostream>
+6
+#include <algorithm>
+7
+using namespace std;
+8
+​
+9
+​
+10
+int main() {
+11
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+12
+    long long int t,n;
+13
+    cin>>t;
+14
+    while(t--)
+15
+    {
+16
+        cin>>n;
+17
+        long int s=0;
+18
+        for(long long int i=0;i<31;i++)
+19
+        {
+20
+            if(n&(1ll<<i))s+=(1ll<<(31-i));
+21
+        }
+22
+        cout<<s<<endl;
+23
+    }
+24
+    return 0;
+25
+}
